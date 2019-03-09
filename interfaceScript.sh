@@ -18,7 +18,7 @@ fi
 interface=$1
 ipaddress=$2
 
-#writting to the interaces file
+#writting to the interfaces file
 echo -e "\nauto $interface \niface $interface inet static \n\taddress $ipaddress \n\tnetmask 255.255.255.0 \n\tgateway 192.168.0.1" >> /tmp/stuff
 
 #exiting script
