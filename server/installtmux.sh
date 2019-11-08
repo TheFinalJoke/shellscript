@@ -1,28 +1,14 @@
-# Install tmux on rhel/centos 7
+cd /etc/bash.bashrc
+git clone https://github.com/gpakosz/.tmux.git
+ln -s -f .tmux/.tmux.conf
+cp .tmux/.tmux.conf.local .
 
-# install deps
-yum install gcc kernel-devel make ncurses-devel
+#Alias
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
 
-# DOWNLOAD SOURCES FOR LIBEVENT AND MAKE AND INSTALL
-curl -OL https://github.com/libevent/libevent/releases/download/release-2.1.8-stable/libevent-2.1.8-stable.tar.gz
-tar -xvzf libevent-2.1.8-stable.tar.gz
-cd libevent-2.1.8-stable
-./configure --prefix=/usr/local
-make
-sudo make install
-cd ..
-
-# DOWNLOAD SOURCES FOR TMUX AND MAKE AND INSTALL
-curl -OL https://github.com/tmux/tmux/releases/download/2.7/tmux-2.7.tar.gz
-tar -xvzf tmux-2.7.tar.gz
-cd tmux-2.7
-LDFLAGS="-L/usr/local/lib -Wl,-rpath=/usr/local/lib" ./configure --prefix=/usr/local
-make
-sudo make install
-cd ..
-
-# pkill tmux
-# close your terminal window (flushes cached tmux executable)
-# open new shell and check tmux version
-tmux -V
-
+bind -n M-Left select-pane -L >> .tmux.conf.local
+bind -n M-Right select-pane -R >> .tmux.conf.local 
+bind -n M-Up select-pane -U >> .tmux.conf.local
+bind -n M-Down select-pane -D >> .tmux.conf.local
